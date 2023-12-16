@@ -1,11 +1,21 @@
+import { app } from "./app.js";
 import connectDB from "./db/index.js";
 import dotenv from "dotenv"
+
+// dotenv connection here of import modules
 
 dotenv.config({
     path : './env'
 })
 
-connectDB()
+connectDB().then(
+
+    app.listen(process.env.PORT, () => {
+        console.log(`server stared on port ${process.env.PORT}`);
+    })
+).catch((error) => {
+    console.error("Error to connect app" , error);
+})
 
 
 
